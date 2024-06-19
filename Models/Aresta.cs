@@ -9,9 +9,9 @@ namespace TD02.Models
     {
         public Vertice origem;
         public Vertice destino;
-        public int peso;
+        public double peso;
 
-        public Aresta(Vertice _origem, Vertice _destino, int _peso)
+        public Aresta(Vertice _origem, Vertice _destino, double _peso)
         {
             origem = _origem;
             destino = _destino;

@@ -7,7 +7,7 @@ namespace TD02.Models
 {
     public class Vertice
     {
-        public int prioridade;
+        public double prioridade;
         public bool visitado;
         public List<Aresta> arestas;
         public string nome;

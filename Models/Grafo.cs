@@ -27,7 +27,7 @@ namespace TD02.Models
             }
         }
 
-        public void AdicionaAresta(string origem, string destino, int peso)
+        public void AdicionaAresta(string origem, string destino, double peso)
         {
             if (vertices.TryGetValue(origem, out Vertice verifiedOrigem) && vertices.TryGetValue(destino, out Vertice verifiedDestino))
             {
@@ -41,18 +41,18 @@ namespace TD02.Models
             }
         }
 
-        public void caminhoMinimoDijkstra(string origem, string destino)
+        public string caminhoMinimoDijkstra(string origem, string destino)
         {
             if (vertices.TryGetValue(origem, out Vertice verifiedOrigem) && vertices.TryGetValue(destino, out Vertice verifiedDestino))
             {
-                PriorityQueue<Vertice, int> naoVisitados = new PriorityQueue<Vertice, int>();
+                PriorityQueue<Vertice, double> naoVisitados = new PriorityQueue<Vertice, double>();
 
                 vertices[destino].path.Add(vertices[origem]);
                 naoVisitados.Enqueue(verifiedOrigem, 0);
 
-                while (naoVisitados.TryPeek(out Vertice peekedVertice, out int peekedDistance) && peekedDistance != int.MaxValue)
+                while (naoVisitados.TryPeek(out Vertice peekedVertice, out double peekedDistance) && peekedDistance != double.MaxValue)
                 {
-                    naoVisitados.TryDequeue(out Vertice currentVertice, out int currentDistance);
+                    naoVisitados.TryDequeue(out Vertice currentVertice, out double currentDistance);
                     vertices[currentVertice.nome].visitado = true;
                     foreach (Aresta aresta in currentVertice.arestas)
                     {
@@ -73,11 +73,11 @@ namespace TD02.Models
                         }
                     }
                 }
-                Console.WriteLine($"Caminho de {origem} para {destino}: {vertices[origem].nome} -> {string.Join(" -> ", vertices[destino].path.Select(v => v.nome))} -> {vertices[destino].nome} com distancia {vertices[destino].prioridade}!");
+                return ($"Caminho de {origem} para {destino}: {string.Join(" -> ", vertices[destino].path.Select(v => v.nome))} -> {vertices[destino].nome} com distancia {vertices[destino].prioridade}!");
             }
             else
             {
-                Console.WriteLine($"Erro ao encontrar o caminho de {origem} para {destino}!");
+                return ($"Erro ao encontrar o caminho de {origem} para {destino}!");
             }
         }
     }
