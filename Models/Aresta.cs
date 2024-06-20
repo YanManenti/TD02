@@ -7,11 +7,11 @@ namespace TD02.Models
 {
     public class Aresta
     {
-        public Vertice origem;
-        public Vertice destino;
+        public string origem;
+        public string destino;
         public double peso;
 
-        public Aresta(Vertice _origem, Vertice _destino, double _peso)
+        public Aresta(string _origem, string _destino, double _peso)
         {
             origem = _origem;
             destino = _destino;

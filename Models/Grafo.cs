@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace TD02.Models
 {
     public class Grafo
@@ -31,7 +26,7 @@ namespace TD02.Models
         {
             if (vertices.TryGetValue(origem, out Vertice verifiedOrigem) && vertices.TryGetValue(destino, out Vertice verifiedDestino))
             {
-                Aresta a = new Aresta(verifiedOrigem, verifiedDestino, peso);
+                Aresta a = new Aresta(verifiedOrigem.nome, verifiedDestino.nome, peso);
                 verifiedOrigem.AdicionaAresta(a);
                 Console.WriteLine($"Aresta de {origem} para {destino} adicionada com sucesso!");
             }
@@ -41,13 +36,12 @@ namespace TD02.Models
             }
         }
 
-        public string caminhoMinimoDijkstra(string origem, string destino)
+        public List<Aresta> caminhoMinimoDijkstra(string origem, string destino)
         {
             if (vertices.TryGetValue(origem, out Vertice verifiedOrigem) && vertices.TryGetValue(destino, out Vertice verifiedDestino))
             {
                 PriorityQueue<Vertice, double> naoVisitados = new PriorityQueue<Vertice, double>();
 
-                vertices[destino].path.Add(vertices[origem]);
                 naoVisitados.Enqueue(verifiedOrigem, 0);
 
                 while (naoVisitados.TryPeek(out Vertice peekedVertice, out double peekedDistance) && peekedDistance != double.MaxValue)
@@ -56,28 +50,25 @@ namespace TD02.Models
                     vertices[currentVertice.nome].visitado = true;
                     foreach (Aresta aresta in currentVertice.arestas)
                     {
-                        Vertice currentDestino = aresta.destino;
-                        if (!vertices[currentDestino.nome].visitado)
+                        string currentDestino = aresta.destino;
+                        if (!vertices[currentDestino].visitado)
                         {
-                            if (currentDistance + aresta.peso < vertices[currentDestino.nome].prioridade)
+                            if (currentDistance + aresta.peso < vertices[currentDestino].prioridade)
                             {
-                                vertices[currentDestino.nome].prioridade = currentDistance + aresta.peso;
-                                if (vertices[currentDestino.nome].path.Count > 0)
-                                {
-                                    vertices[currentDestino.nome].path.Clear();
-                                    vertices[currentDestino.nome].path.AddRange(vertices[currentVertice.nome].path);
-                                }
-                                vertices[currentDestino.nome].path.Add(vertices[currentVertice.nome]);
-                                naoVisitados.Enqueue(vertices[currentDestino.nome], vertices[currentDestino.nome].prioridade);
+                                vertices[currentDestino].prioridade = currentDistance + aresta.peso;
+                                vertices[currentDestino].path.Clear();
+                                vertices[currentDestino].path.AddRange(vertices[aresta.origem].path);
+                                vertices[currentDestino].path.Add(aresta);
+                                naoVisitados.Enqueue(vertices[currentDestino], vertices[currentDestino].prioridade);
                             }
                         }
                     }
                 }
-                return ($"Caminho de {origem} para {destino}: {string.Join(" -> ", vertices[destino].path.Select(v => v.nome))} -> {vertices[destino].nome} com distancia {vertices[destino].prioridade}!");
+                return vertices[destino].path;
             }
             else
             {
-                return ($"Erro ao encontrar o caminho de {origem} para {destino}!");
+                return [];
             }
         }
     }

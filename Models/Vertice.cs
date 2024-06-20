@@ -11,13 +11,13 @@ namespace TD02.Models
         public bool visitado;
         public List<Aresta> arestas;
         public string nome;
-        public List<Vertice> path;
+        public List<Aresta> path;
 
         public Vertice(string _nome)
         {
             nome = _nome;
             visitado = false;
-            prioridade = int.MaxValue;
+            prioridade = double.MaxValue;
             arestas = [];
             path = [];
         }

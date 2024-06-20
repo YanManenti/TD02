@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "JswqcwvE4rqCRXzDQdR7NfL8tef+7r1TMqgWNCBmAKNyfTWB7VFwIGNgsyi3DVgl+HGz3EtColcsGrtLOon8dQ==",
+  "dgSpecHash": "8ZTmqP+KiG7hQt2DdBWVIkhcm+Fx8S0NS9ceNSZIyPkJn1vn8eelj0OatkjfdIdtsBoBomoQ7s5ynsiZe02lMg==",
   "success": true,
   "projectFilePath": "C:\\Users\\yamar\\OneDrive\\Área de Trabalho\\Faculdade\\Grafos\\TD02\\TD02.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\yamar\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "C:\\Users\\yamar\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\yamar\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\yamar\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
     "C:\\Users\\yamar\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
     "C:\\Users\\yamar\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
