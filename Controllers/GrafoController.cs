@@ -1,4 +1,5 @@
 using System.Text.Json;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using TD02.Models;
@@ -6,7 +7,7 @@ using TD02.Models;
 namespace TD02.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("/api")]
 public class GrafoController : ControllerBase
 {
     private Grafo grafo = new Grafo();
@@ -19,7 +20,7 @@ public class GrafoController : ControllerBase
         capitaisArray = LoadCapitalNamesArray();
     }
 
-    [HttpGet("~/path", Name = "GetPath")]
+    [HttpGet("path", Name = "GetPath")]
     public IActionResult GetPath(string origem, string destino, double precoGasolina, double autonomiaCarro)
     {
         if (origem == null || destino == null || precoGasolina <= 0 || autonomiaCarro <= 0)
@@ -60,7 +61,7 @@ public class GrafoController : ControllerBase
         return Ok(JsonConvert.SerializeObject(new ResponseObject<Aresta> { message = "Caminho mínimo calculado com sucesso!", data = result }));
     }
 
-    [HttpGet("~/filteredOptions", Name = "GetFilteredOptions")]
+    [HttpGet("filteredOptions", Name = "GetFilteredOptions")]
     public IActionResult GetFilteredOptions(string match)
     {
         List<string> filteredOptions = capitaisArray.Where(capital => capital.Contains(match, StringComparison.CurrentCultureIgnoreCase)).ToList();
