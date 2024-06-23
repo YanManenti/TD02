@@ -1,6 +1,6 @@
 **Required Software**
 <br/>
-[.NET](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+[.NET 8](https://dotnet.microsoft.com/en-us/download)
 
 **Launch Server** 
 <br/>
