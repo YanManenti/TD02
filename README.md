@@ -4,6 +4,12 @@
 
 **Launch Server** 
 <br/>
+*Install .NET https certificate*
+<br/>
+`dotnet dev-certs https --trust`
+<br/>
+*Navigate your cmd to the project folder, then:*
+<br/>
 `dotnet watch --launch-profile https`
 
 **API Documentation**
