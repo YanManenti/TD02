@@ -33,7 +33,7 @@ public class GrafoController : ControllerBase
         }
         if (origem == destino)
         {
-            return Ok(JsonConvert.SerializeObject(new ResponseObject<string> { message = "Origem e destino são iguais!", data = [origem] }));
+            return BadRequest(JsonConvert.SerializeObject(new ResponseObject<string> { message = "Origem e destino são iguais!", data = [origem] }));
         }
 
         grafo = new Grafo();
@@ -58,6 +58,11 @@ public class GrafoController : ControllerBase
         }
         List<Aresta> result = grafo.caminhoMinimoDijkstra(origem, destino);
 
+        if (result.Count == 0)
+        {
+            return BadRequest(JsonConvert.SerializeObject(new ResponseObject<string> { message = "Não foi possível calcular o caminho mínimo!", data = [] }));
+        }
+
         return Ok(JsonConvert.SerializeObject(new ResponseObject<Aresta> { message = "Caminho mínimo calculado com sucesso!", data = result }));
     }
 
@@ -65,6 +70,10 @@ public class GrafoController : ControllerBase
     public IActionResult GetFilteredOptions(string match)
     {
         List<string> filteredOptions = capitaisArray.Where(capital => capital.Contains(match, StringComparison.CurrentCultureIgnoreCase)).ToList();
+        if (filteredOptions.Count == 0)
+        {
+            return BadRequest(JsonConvert.SerializeObject(new ResponseObject<string> { message = "Nenhuma capital encontrada!", data = [] }));
+        }
         return Ok(JsonConvert.SerializeObject(new ResponseObject<string> { message = "Capitais filtradas com sucesso!", data = filteredOptions }));
 
     }
